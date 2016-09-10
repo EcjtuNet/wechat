@@ -19,7 +19,7 @@ class WechatController extends Controller
                 case 'event':
                     break;
                 case 'text':
-                    return "欸~小新又睡觉去了，待会就回你哈";
+                    return "欸~小新又睡觉去了，睡醒了就回你哈".$userApi->get($message->FromUserName)->nickname;
                     break;
                 case 'image':
                     break;
