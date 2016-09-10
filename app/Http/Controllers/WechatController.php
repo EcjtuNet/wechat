@@ -12,14 +12,29 @@ class WechatController extends Controller
 {
     public function serve()
     {
-        Log::info('request arrived.');
-
         $wechat = app('wechat');
-        $wechat->server->setMessageHandler(function($message){
-            return "欢迎关注 日新微信!";
+        $userApi = $wechat->user;
+        $wechat->server->setMessageHandler(function($message) use ($userApi){
+            switch ($message->MsgType) {
+                case 'event':
+                    break;
+                case 'text':
+                    return "欸~小新又睡觉去了，".$userApi->get($message->FromUserName)->nickname."待会就回你哈";
+                    break;
+                case 'image':
+                    break;
+                case 'voice':
+                    break;
+                case 'video':
+                    break;
+                case 'location':
+                    break;
+                case 'link':
+                    break;
+                default:
+                    break;
+            }
         });
-
-        Log::info('return response.');
 
         return $wechat->server->serve();
     }
