@@ -23,7 +23,16 @@ class UserController extends Controller
 
     public function users()
     {
-        $users = $this->wechat->user->lists();
+        $users[0] = $this->wechat->user->lists();
+        $count = ceil((int)$users[0]['total'] / 10000);
+        for($i = 1; $i <= $count; $i++)
+        {
+            $data = $this->wechat->user->lists($users[$i-1]['next_openid']);
+            if ($data->count)
+            {
+                $users[$i] = $data;
+            }
+        }
         return $users;
     }
 
