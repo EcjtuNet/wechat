@@ -19,7 +19,7 @@ class WechatController extends Controller
                 case 'event':
                     break;
                 case 'text':
-                    return (new WechatTextController)->distinguishText($message);
+                    return (new WechatTextController())->distinguishText($message);
                     break;
                 case 'image':
                     break;

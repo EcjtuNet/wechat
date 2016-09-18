@@ -34,6 +34,21 @@ return [
     ],
 
     /*
+     * mock 数据
+     */
+    'enable_mock' => env('WECHAT_ENABLE_MOCK', true),
+    'mock_user' => [
+        "openid" =>"omcLAwq7o-oi6K3SKDb3tinkegp8",
+        // 以下字段为 scope 为 snsapi_userinfo 时需要
+        "nickname" => "only",
+        "sex" =>"1",
+        "province" =>"江西",
+        "city" =>"南昌",
+        "country" =>"中国",
+        "headimgurl" => "http://wx.qlogo.cn/mmopen/Q3auHgzwzM5ECqpLBtTGpcF6PLhyw4TEhHiadS3NA7jFeh1j73icKxxLicGTVOJ5tiazTJQporRjQTR5R6aDVDztNeCbT4PRVuyAbDkGz9kTN4Y/0",
+    ],
+
+    /*
      * OAuth 配置
      *
      * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
