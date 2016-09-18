@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Log;
+use App\Http\Controllers\WechatTextController;
 
 class WechatController extends Controller
 {
@@ -19,7 +19,7 @@ class WechatController extends Controller
                 case 'event':
                     break;
                 case 'text':
-                    return "欸~小新又睡觉去了，睡醒了就回你哈".$userApi->get($message->FromUserName)->nickname;
+                    return (new WechatTextController)->distinguishText($message);
                     break;
                 case 'image':
                     break;

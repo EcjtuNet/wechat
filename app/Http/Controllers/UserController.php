@@ -21,7 +21,7 @@ class UserController extends Controller
         $this->wechat = $wechat;
     }
 
-    public function users()
+    public function getAllUsers()
     {
         $users[0] = $this->wechat->user->lists();
         $count = ceil((int)$users[0]['total'] / 10000);
@@ -36,7 +36,7 @@ class UserController extends Controller
         return $users;
     }
 
-    public function user($openId)
+    public function getUserDetails($openId)
     {
         $user = $this->wechat->user->get($openId);
         return $user;
