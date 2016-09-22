@@ -34,4 +34,5 @@ class WechatTextController extends Controller
         $this->dispatch(new SendClass($sender));
         return '小新正在努力查找你今天的课表！（兴奋脸）';
     }
+
 }

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('nickname');
             $table->string('sex');
             $table->string('language');
+            $table->string('city');
             $table->string('province');
             $table->string('country');
             $table->string('headimgurl');
@@ -26,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('remark');
             $table->string('groupid');
             $table->string('tagid_list');
-            $table->string('student_id');
+            $table->string('student_id')->nullable();
             $table->boolean('bound')->default(false);
             $table->rememberToken();
             $table->timestamps();

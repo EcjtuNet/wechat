@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,37 @@ class UserController extends Controller
     public function __construct(Application $wechat)
     {
         $this->wechat = $wechat;
+    }
+
+    public function checkUser($openId)
+    {
+        if (DB::table('users')->where('openid', $openId)->first())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function addUser($openId)
+    {
+        $userInfo = $this->getUserDetails($openId);
+        dd($userInfo);
+        DB::table('users')->insert(
+            $userInfo
+        );
+    }
+
+    public function boundUser($openId)
+    {
+       DB::table('users')->where('openid', $openId)->update(['bound' => 1]);
+    }
+
+    public function unboundUser($openId)
+    {
+        DB::table('users')->where('openid', $openId)->update(['bound' => 0]);
     }
 
     public function getAllUsers()
