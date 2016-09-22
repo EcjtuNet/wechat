@@ -46,8 +46,16 @@ class WechatTextController extends Controller
 
     public function score($sender)
     {
-        $this->dispatch(new SendScore($sender));
-        return '小新正在努力查找你的成绩~~~（紧张脸）';
+        if ($this->checkUserExist($sender))
+        {
+            $this->dispatch(new SendScore($sender));
+            return '小新正在努力查找你的成绩~~~（紧张脸）';
+        }
+        else
+        {
+            $this->addUser($sender);
+            return '第一次见，请多指教';
+        }
     }
 
     public function classTable($sender)

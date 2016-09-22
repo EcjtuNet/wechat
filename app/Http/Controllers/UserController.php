@@ -38,19 +38,19 @@ class UserController extends Controller
     {
         $userInfo = $this->getUserDetails($openId);
         $data = [
-            'subscribe'      => $userInfo.subscribe,
-            'openid'         => $userInfo.openid,
-            'nickname'       => $userInfo.nickname,
-            'sex'            => $userInfo.sex,
-            'language'       => $userInfo.language,
-            'city'           => $userInfo.city,
-            'province'       => $userInfo.province,
-            'country'        => $userInfo.country,
-            'headimgurl'     => $userInfo.headimgurl,
-            'subscribe_time' => $userInfo.subscribe_time,
-            'remark'         => $userInfo.remark,
-            'groupid'        => $userInfo.groupid,
-            'tagid_list'     => (string)$userInfo.tagid_list,
+            'subscribe'      => $userInfo['subscribe'],
+            'openid'         => $userInfo['openid'],
+            'nickname'       => $userInfo['nickname'],
+            'sex'            => $userInfo['sex'],
+            'language'       => $userInfo['language'],
+            'city'           => $userInfo['city'],
+            'province'       => $userInfo['province'],
+            'country'        => $userInfo['country'],
+            'headimgurl'     => $userInfo['headimgurl'],
+            'subscribe_time' => $userInfo['subscribe_time'],
+            'remark'         => $userInfo['remark'],
+            'groupid'        => $userInfo['groupid'],
+            'tagid_list'     =>  serialize($userInfo['tagid_list']),
         ];
 
         $query = DB::table('users')->insert($data);
