@@ -37,20 +37,36 @@ class UserController extends Controller
     public function addUser($openId)
     {
         $userInfo = $this->getUserDetails($openId);
-        dd($userInfo);
-        DB::table('users')->insert(
-            $userInfo
-        );
+        $data = [
+            'subscribe'      => $userInfo.subscribe,
+            'openid'         => $userInfo.openid,
+            'nickname'       => $userInfo.nickname,
+            'sex'            => $userInfo.sex,
+            'language'       => $userInfo.language,
+            'city'           => $userInfo.city,
+            'province'       => $userInfo.province,
+            'country'        => $userInfo.country,
+            'headimgurl'     => $userInfo.headimgurl,
+            'subscribe_time' => $userInfo.subscribe_time,
+            'remark'         => $userInfo.remark,
+            'groupid'        => $userInfo.groupid,
+            'tagid_list'     => (string)$userInfo.tagid_list,
+        ];
+
+        $query = DB::table('users')->insert($data);
+        return $query;
     }
 
     public function boundUser($openId)
     {
-       DB::table('users')->where('openid', $openId)->update(['bound' => 1]);
+       $query = DB::table('users')->where('openid', $openId)->update(['bound' => 1]);
+        return $query;
     }
 
     public function unboundUser($openId)
     {
-        DB::table('users')->where('openid', $openId)->update(['bound' => 0]);
+        $query = DB::table('users')->where('openid', $openId)->update(['bound' => 0]);
+        return $query;
     }
 
     public function getAllUsers()
@@ -68,7 +84,7 @@ class UserController extends Controller
         return $users;
     }
 
-    public function getUserDetails($openId)
+    private function getUserDetails($openId)
     {
         $user = $this->wechat->user->get($openId);
         return $user;

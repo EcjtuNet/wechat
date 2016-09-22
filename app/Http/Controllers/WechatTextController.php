@@ -6,7 +6,7 @@ use App\Jobs\SendClass;
 use App\Jobs\SendScore;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\UserController;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -21,6 +21,27 @@ class WechatTextController extends Controller
                 return $this->classTable($sender);
         }
         return 'success';
+    }
+
+    public function checkUserExist($sender)
+    {
+        $wechat = app('wechat');
+        $check = (new UserController($wechat))->checkUser($sender);
+        if($check)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function addUser($sender)
+    {
+        $wechat = app('wechat');
+        $query = (new UserController($wechat))->addUser($sender);
+        return $query;
     }
 
     public function score($sender)
