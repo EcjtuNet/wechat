@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            //微信基本信息
             $table->string('subscribe');
             $table->string('openid');
             $table->string('nickname');
@@ -27,8 +28,11 @@ class CreateUsersTable extends Migration
             $table->string('remark');
             $table->string('groupid');
             $table->string('tagid_list');
+            //校园服务信息
             $table->string('student_id')->nullable();
+            $table->string('password')->nullable();
             $table->boolean('bound')->default(false);
+
             $table->rememberToken();
             $table->timestamps();
         });
