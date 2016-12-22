@@ -56,6 +56,13 @@ class UserController extends Controller
         return $query;
     }
 
+    public function boundStudentId($openId, $student_id)
+    {
+        $data = [
+            'student_id' => $student_id
+        ];
+    }
+
     private function getUserDetails($openId)
     {
         $user = $this->wechat->user->get($openId);
