@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\SendClass;
 use App\Jobs\SendScore;
-use Illuminate\Support\Facades\Log;
+use EasyWeChat\Message\Text;
+use EasyWeChat;
 
 class WechatTextController extends Controller
 {
@@ -81,7 +82,15 @@ class WechatTextController extends Controller
 
     public function boundStudentId($content, $sender)
     {
-        return $content;
+        if ($this->checkUserBound($sender))
+        {
+            $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
+            EasyWeChat::staff()->message($message)->to($sender)->send();
+        }
+        else
+        {
+            $student_id = preg_replace('/bd/', '', $content);
+        }
     }
 
     private function checkUserBound($sender)
