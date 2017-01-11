@@ -54,6 +54,38 @@ class WechatTextController extends Controller
         }
     }
 
+    public function boundStudentId($content, $sender)
+    {
+        if ($this->checkUserBound($sender))
+        {
+            $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
+            EasyWeChat::staff()->message($message)->to($sender)->send();
+        }
+        else
+        {
+            $student_id = preg_replace('/bd/', '', $content);
+            return $student_id;
+        }
+    }
+
+    public function boundStudentPassword($content, $sender)
+    {
+
+    }
+
+    private function checkUserBound($sender)
+    {
+        $check = (new UserController())->checkUserBound($sender);
+        if($check)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function searchScore($sender)
     {
         if ($this->checkUserBound($sender))
@@ -77,32 +109,6 @@ class WechatTextController extends Controller
         else
         {
             return (new UserController())->firstMeet();
-        }
-    }
-
-    public function boundStudentId($content, $sender)
-    {
-        if ($this->checkUserBound($sender))
-        {
-            $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
-            EasyWeChat::staff()->message($message)->to($sender)->send();
-        }
-        else
-        {
-            $student_id = preg_replace('/bd/', '', $content);
-        }
-    }
-
-    private function checkUserBound($sender)
-    {
-        $check = (new UserController())->checkUserBound($sender);
-        if($check)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

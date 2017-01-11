@@ -16,21 +16,9 @@ class UserController extends Controller
         $this->wechat = app('wechat');
     }
 
-    public function checkUserBound($openId)
-    {
-        if (DB::table('users')->where('openid', $openId)->first()['bound'])
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     public function firstMeet()
     {
-        return "嗨，请回复 \"bd学号\" 进行绑定（不用双引号）";
+        return "嗨!请回复 \"bd学号\" 进行绑定（不用双引号）";
     }
 
     public function addUser($openId)
@@ -56,26 +44,44 @@ class UserController extends Controller
         return $query;
     }
 
-    public function boundStudentId($openId, $student_id)
-    {
-        $data = [
-            'student_id' => $student_id
-        ];
-    }
-
     private function getUserDetails($openId)
     {
         $user = $this->wechat->user->get($openId);
         return $user;
     }
 
-    private function boundUser($openId)
+    public function checkUserBound($openId)
     {
-       $query = DB::table('users')->where('openid', $openId)->update(['bound' => 1]);
+        if (DB::table('users')->where('openid', $openId)->first()['bound'])
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function boundStudentId($openId, $student_id)
+    {
+        $data = [
+            'student_id' => $student_id
+        ];
+        $query = DB::table('users')->where('openid', $openId)->update($data);
         return $query;
     }
 
-    private function unboundUser($openId)
+    public function boundStudentPassword($openId, $password)
+    {
+        $data = [
+            'password' => $password,
+            'bound' => True
+        ];
+        $query = DB::table('users')->where('openid', $openId)->update($data);
+        return $query;
+    }
+
+    public function unboundUser($openId)
     {
         $query = DB::table('users')->where('openid', $openId)->update(['bound' => 0]);
         return $query;
