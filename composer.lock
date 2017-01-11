@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c560227de84b1332f3eeb63bb5b9676",
-    "content-hash": "484fe5e36900887d71cacac8b2378419",
+    "hash": "ab2d7e584af4f29baf65feb5e7b4cb55",
+    "content-hash": "b74ef8bf098989de06f9d7517bacd21b",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1037,16 +1037,16 @@
         },
         {
             "name": "overtrue/laravel-wechat",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/laravel-wechat.git",
-                "reference": "305b7510a3d5b10dc210a229208fd9965337d525"
+                "reference": "962863eccfaa22eb62bcd8bb9fbf50bc1b7d0c4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/overtrue/laravel-wechat/305b7510a3d5b10dc210a229208fd9965337d525.zip",
-                "reference": "305b7510a3d5b10dc210a229208fd9965337d525",
+                "url": "https://packagist.phpcomposer.com/files/overtrue/laravel-wechat/962863eccfaa22eb62bcd8bb9fbf50bc1b7d0c4e.zip",
+                "reference": "962863eccfaa22eb62bcd8bb9fbf50bc1b7d0c4e",
                 "shasum": ""
             },
             "require": {
@@ -1075,7 +1075,7 @@
                 "wechat",
                 "weixin"
             ],
-            "time": "2016-09-05 10:48:54"
+            "time": "2017-01-03 03:45:28"
         },
         {
             "name": "overtrue/socialite",
@@ -1129,16 +1129,16 @@
         },
         {
             "name": "overtrue/wechat",
-            "version": "3.2.1",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/wechat.git",
-                "reference": "602a2255a7370e75c407a8e2f6e9514381696f00"
+                "reference": "8a4e1db64722b29e6d67a5a6f7bd75e55845c639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/overtrue/wechat/602a2255a7370e75c407a8e2f6e9514381696f00.zip",
-                "reference": "602a2255a7370e75c407a8e2f6e9514381696f00",
+                "url": "https://packagist.phpcomposer.com/files/overtrue/wechat/8a4e1db64722b29e6d67a5a6f7bd75e55845c639.zip",
+                "reference": "8a4e1db64722b29e6d67a5a6f7bd75e55845c639",
                 "shasum": ""
             },
             "require": {
@@ -1183,7 +1183,7 @@
                 "weixin",
                 "weixin-sdk"
             ],
-            "time": "2016-12-20 08:37:41"
+            "time": "2017-01-04 03:18:03"
         },
         {
             "name": "paragonie/random_compat",
@@ -1449,73 +1449,25 @@
             "time": "2016-03-09 05:03:14"
         },
         {
-            "name": "rmccue/requests",
-            "version": "v1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rmccue/Requests.git",
-                "reference": "87932f52ffad70504d93f04f15690cf16a089546"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/rmccue/Requests/87932f52ffad70504d93f04f15690cf16a089546.zip",
-                "reference": "87932f52ffad70504d93f04f15690cf16a089546",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "require-dev": {
-                "requests/test-server": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Requests": "library/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "ISC"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan McCue",
-                    "homepage": "http://ryanmccue.info"
-                }
-            ],
-            "description": "A HTTP library written in PHP, for human beings.",
-            "homepage": "http://github.com/rmccue/Requests",
-            "keywords": [
-                "curl",
-                "fsockopen",
-                "http",
-                "idna",
-                "ipv6",
-                "iri",
-                "sockets"
-            ],
-            "time": "2016-10-13 00:11:37"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.4",
+            "version": "v5.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756"
+                "reference": "cd142238a339459b10da3d8234220963f392540c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/545ce9136690cea74f98f86fbb9c92dd9ab1a756.zip",
-                "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+                "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/cd142238a339459b10da3d8234220963f392540c.zip",
+                "reference": "cd142238a339459b10da3d8234220963f392540c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1"
+                "mockery/mockery": "~0.9.1",
+                "symfony/phpunit-bridge": "~3.2"
             },
             "type": "library",
             "extra": {
@@ -1548,7 +1500,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-11-24 01:01:23"
+            "time": "2016-12-29 10:02:40"
         },
         {
             "name": "symfony/console",
@@ -2691,16 +2643,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "0.9.6",
+            "version": "0.9.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0"
+                "reference": "4de7969f4664da3cef1ccd83866c9f59378c3371"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/padraic/mockery/65d4ca18e15cb02eeb1e5336f884e46b9b905be0.zip",
-                "reference": "65d4ca18e15cb02eeb1e5336f884e46b9b905be0",
+                "url": "https://packagist.phpcomposer.com/files/padraic/mockery/4de7969f4664da3cef1ccd83866c9f59378c3371.zip",
+                "reference": "4de7969f4664da3cef1ccd83866c9f59378c3371",
                 "shasum": ""
             },
             "require": {
@@ -2752,7 +2704,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-09-30 12:09:40"
+            "time": "2016-12-19 14:50:55"
         },
         {
             "name": "phpdocumentor/reflection-common",
