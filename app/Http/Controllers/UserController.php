@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function firstMeet()
     {
-        return "嗨!请回复 \"bd学号\" 进行绑定（不用双引号）";
+        return "嗨!请回复 \"bd+学号\" 进行绑定（不用双引号和加号）";
     }
 
     public function addUser($openId)

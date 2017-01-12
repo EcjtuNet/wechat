@@ -74,7 +74,13 @@ class WechatTextController extends Controller
     public function confirmBound($sender)
     {
         $student_id = (new CacheController())->get_studentid_by_openid($sender);
-        return str($student_id);
+        $user_info = (new UserController())->addUser($sender);
+        if ($user_info)
+        {
+            (new UserController())->boundStudentId($sender, $student_id);
+            (new CacheController())->del_studentid_with_openid($sender);
+            return "请回复\"mm+智慧交大登录密码\"绑定密码(不用双引号和加号)";
+        }
     }
 
     public function boundStudentPassword($content, $sender)
