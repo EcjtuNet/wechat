@@ -54,6 +54,12 @@ class UserController extends Controller
         return $user;
     }
 
+    public function getStudentId($openId)
+    {
+       $query = DB::table('users')->where('openid', $openId)->value('student_id');
+        return $query;
+    }
+
     public function checkUserExist($openId)
     {
         $query = DB::table('users')->where('openid', $openId)->first();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\savePassword;
 use App\Jobs\SendClass;
 use App\Jobs\SendScore;
 use EasyWeChat\Message\Text;
@@ -86,7 +87,17 @@ class WechatTextController extends Controller
 
     public function boundStudentPassword($content, $sender)
     {
-
+        $student_id = (new UserController())->getStudentId($sender);
+        if ($student_id)
+        {
+            $password = preg_replace('/mm/', '', $content);
+            $this->dispatch(new savePassword($student_id, $password,$sender));
+            return 'success';
+        }
+        else
+        {
+            return "请先绑定学号";
+        }
     }
 
     private function checkUserBound($sender)

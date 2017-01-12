@@ -26,4 +26,18 @@ class SchoolServiceController extends Controller
             $this->dispatch(new confirmNameFail($sender));
         }
     }
+
+    public function savePassword($student_id, $password, $sender)
+    {
+        $query = (new SchoolServiceAPI())->savePassword($student_id, $password);
+        if ($query)
+        {
+            (new UserController())->boundStudentPassword($sender, $password);
+            $this->dispatch(new sendPasswordSuccess($sender));
+        }
+        else
+        {
+            $this->dispatch(new sendPasswordFail($sender));
+        }
+    }
 }

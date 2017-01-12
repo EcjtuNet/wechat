@@ -27,10 +27,30 @@ class SchoolServiceAPI
             ]
         ]);
         $json_body = $response->getBody();
-        $body = json_decode($json_body,true);
+        $body = json_decode($json_body, true);
         if ($body['status'])
         {
             return $body['data']['name'];
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function savePassword($student_id, $password)
+    {
+        $response = $this->client->post('savePassword',[
+            'form_params' => [
+                'student_id' => $student_id,
+                'password' => $password
+            ]
+        ]);
+        $json_body = $response->getBody();
+        $body = json_decode($json_body, true);
+        if ($body['status'])
+        {
+            return true;
         }
         else
         {
