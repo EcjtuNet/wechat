@@ -16,4 +16,10 @@ class CacheController extends Controller
         Redis::expire($cache, intval(env('STUDENT_ID_TIMEOUT')));
         $this->dispatch(new confirmName($student_id, $openid));
     }
+
+    public function get_studentid_by_openid($openid)
+    {
+        $cache = Redis::get("$openid:xh");
+        return $cache;
+    }
 }

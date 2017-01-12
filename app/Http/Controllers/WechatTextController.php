@@ -26,7 +26,7 @@ class WechatTextController extends Controller
             case "绑定密码":
                 return $this->boundStudentPassword($content, $sender);
             case "确定绑定":
-                return $this->confirmBoundStudentId($sender);
+                return $this->confirmBound($sender);
             default:
                 return 'success';
         }
@@ -69,6 +69,12 @@ class WechatTextController extends Controller
             (new CacheController())->save_studentid_with_openid($student_id, $sender);
             return "success";
         }
+    }
+
+    public function confirmBound($sender)
+    {
+        $student_id = (new CacheController())->get_studentid_by_openid($sender);
+        return str($student_id);
     }
 
     public function boundStudentPassword($content, $sender)
