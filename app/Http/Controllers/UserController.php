@@ -41,7 +41,7 @@ class UserController extends Controller
         ];
         if ( $this->checkUserExist($openId))
         {
-            $query = DB::table('users')->update($data);
+            $query = DB::table('users')->where('openid', $openId)->update($data);
         }
         else
         {
@@ -58,6 +58,8 @@ class UserController extends Controller
 
     public function checkUserExist($openId)
     {
+        $query = DB::table('users')->where('openid', $openId);
+        dd($query);
         if (DB::table('users')->where('openid', $openId))
         {
             return true;
