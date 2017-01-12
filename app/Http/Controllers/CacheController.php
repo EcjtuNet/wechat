@@ -19,7 +19,7 @@ class CacheController extends Controller
 
     public function del_studentid_with_openid($openid)
     {
-        Redis::del("openid:xh");
+        Redis::del("$openid:xh");
     }
 
     public function get_studentid_by_openid($openid)
