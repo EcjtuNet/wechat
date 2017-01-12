@@ -52,7 +52,7 @@ class UserController extends Controller
 
     public function checkUserBound($openId)
     {
-        if (DB::table('users')->where('openid', $openId)->first()['bound'])
+        if (DB::table('users')->where('openid', $openId)->value('bound'))
         {
             return true;
         }
