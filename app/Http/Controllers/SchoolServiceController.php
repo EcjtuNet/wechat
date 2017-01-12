@@ -22,6 +22,7 @@ class SchoolServiceController extends Controller
         }
         else
         {
+            (new CacheController())->del_studentid_with_openid($sender);
             $this->dispatch(new confirmNameFail($sender));
         }
     }
