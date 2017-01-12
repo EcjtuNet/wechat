@@ -28,6 +28,6 @@ class sendName extends Job implements SelfHandling
     public function handle()
     {
         $message = new Text(['content' => "$this->name 同学，确定绑定请回复 \"确定绑定\""]);
-        EasyWeChat::staff()->message($message)->to($this->sender)-send();
+        EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
 }
