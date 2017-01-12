@@ -47,10 +47,10 @@ class WechatTextController extends Controller
         {
             return "绑定学号";
         }
-//        elseif (preg_match_all(,$content))
-//        {
-//            return "绑定密码";
-//        }
+        elseif (preg_match_all("/mm.*/",$content))
+        {
+            return "绑定密码";
+        }
         else
         {
             return $content;
