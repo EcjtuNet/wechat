@@ -40,15 +40,12 @@ class UserController extends Controller
             'groupid'        => $userInfo['groupid'],
             'tagid_list'     =>  json_encode($userInfo['tagid_list']),
         ];
-        if ( $this->checkUserExist($openId))
-        {
-            $query = DB::table('users')->where('openid', $openId)->update($data);
-        }
-        else
+        if (!$this->checkUserExist($openId))
         {
             $query = DB::table('users')->insert($data);
+            return $query;
         }
-        return $query;
+        return DB::table('users')->where('openid', $openId)->first();
     }
 
     private function getUserDetails($openId)
@@ -60,8 +57,7 @@ class UserController extends Controller
     public function checkUserExist($openId)
     {
         $query = DB::table('users')->where('openid', $openId)->first();
-        Log::info(var_dump($query));
-        if (DB::table('users')->where('openid', $openId))
+        if ($query)
         {
             return true;
         }

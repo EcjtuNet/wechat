@@ -81,6 +81,7 @@ class WechatTextController extends Controller
             (new CacheController())->del_studentid_with_openid($sender);
             return "请回复\"mm+智慧交大登录密码\"绑定密码(不用双引号和加号)";
         }
+        return "诶呀，好像出了点问题，稍后再试试吧";
     }
 
     public function boundStudentPassword($content, $sender)
