@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Jobs\Job;
 use EasyWeChat\Message\Text;
+use EasyWeChat;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class sendName extends Job implements SelfHandling

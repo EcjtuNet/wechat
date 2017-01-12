@@ -65,7 +65,7 @@ class WechatTextController extends Controller
         {
             $student_id = preg_replace('/bd/', '', $content);
             (new CacheController())->save_studentid_with_openid($student_id, $sender);
-            return '绑定中';
+            return "success";
         }
     }
 
