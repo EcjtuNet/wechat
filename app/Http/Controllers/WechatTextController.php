@@ -75,7 +75,7 @@ class WechatTextController extends Controller
     {
         $student_id = (new CacheController())->get_studentid_by_openid($sender);
         $user_info = (new UserController())->addUser($sender);
-        if ($user_info)
+        if ($user_info && $student_id)
         {
             (new UserController())->boundStudentId($sender, $student_id);
             (new CacheController())->del_studentid_with_openid($sender);

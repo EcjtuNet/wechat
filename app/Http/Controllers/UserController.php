@@ -88,7 +88,7 @@ class UserController extends Controller
         {
             $this->addUser($openId);
         }
-        $query = DB::table('users')->where('openid', $openId)->update($data);
+        $query = DB::table('users')->where('openid', $openId)->insert($data);
         return $query;
     }
 
