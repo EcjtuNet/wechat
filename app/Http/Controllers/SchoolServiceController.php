@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Jobs\confirmName;
 use App\Jobs\confirmNameFail;
 use App\Jobs\sendName;
+use App\Jobs\sendPasswordFail;
+use App\Jobs\sendPasswordSuccess;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
