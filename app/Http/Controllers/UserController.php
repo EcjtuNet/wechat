@@ -38,10 +38,8 @@ class UserController extends Controller
             'subscribe_time' => $userInfo['subscribe_time'],
             'remark'         => $userInfo['remark'],
             'groupid'        => $userInfo['groupid'],
-            'tagid_list'     =>  serialize($userInfo['tagid_list']),
+            'tagid_list'     =>  json_encode($userInfo['tagid_list']),
         ];
-        Log::info($userInfo['tagid_list']);
-        Log::info(gettype($userInfo['tagid_list']));
         if ( $this->checkUserExist($openId))
         {
             $query = DB::table('users')->where('openid', $openId)->update($data);
@@ -62,7 +60,7 @@ class UserController extends Controller
     public function checkUserExist($openId)
     {
         $query = DB::table('users')->where('openid', $openId);
-        Log::info($query);
+        Log::info(var_dump($query));
         if (DB::table('users')->where('openid', $openId))
         {
             return true;
