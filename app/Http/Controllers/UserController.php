@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function checkUserExist($openId)
     {
-        $query = DB::table('users')->where('openid', $openId);
+        $query = DB::table('users')->where('openid', $openId)->first();
         Log::info(var_dump($query));
         if (DB::table('users')->where('openid', $openId))
         {
