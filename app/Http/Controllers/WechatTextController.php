@@ -25,6 +25,8 @@ class WechatTextController extends Controller
                 return $this->boundStudentId($content, $sender);
             case "绑定密码":
                 return $this->boundStudentPassword($content, $sender);
+            case "确定绑定":
+                return $this->confirmBoundStudentId($sender);
             default:
                 return 'success';
         }

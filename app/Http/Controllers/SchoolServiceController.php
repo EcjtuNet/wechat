@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\confirmName;
+use App\Jobs\confirmNameFail;
 use App\Jobs\sendName;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class SchoolServiceController extends Controller
         }
         else
         {
-            return 'error';
+            $this->dispatch(new confirmNameFail($sender));
         }
     }
 }
