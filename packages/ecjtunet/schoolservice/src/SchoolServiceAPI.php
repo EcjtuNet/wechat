@@ -26,6 +26,15 @@ class SchoolServiceAPI
                 'student_id' => $student_id
             ]
         ]);
-        dd($response);
+        $json_body = $response->getBody();
+        $body = json_decode($json_body,true);
+        if ($body['status'])
+        {
+            return $body['data']['name'];
+        }
+        else
+        {
+            return false;
+        }
     }
 }
