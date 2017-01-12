@@ -39,8 +39,14 @@ class UserController extends Controller
             'groupid'        => $userInfo['groupid'],
             'tagid_list'     =>  serialize($userInfo['tagid_list']),
         ];
-
-        $query = DB::table('users')->insert($data);
+        if ( $this->checkUserExist($openId))
+        {
+            $query = DB::table('users')->update($data);
+        }
+        else
+        {
+            $query = DB::table('users')->insert($data);
+        }
         return $query;
     }
 
@@ -48,6 +54,18 @@ class UserController extends Controller
     {
         $user = $this->wechat->user->get($openId);
         return $user;
+    }
+
+    public function checkUserExist($openId)
+    {
+        if (DB::table('users')->where('openid', $openId))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function checkUserBound($openId)
@@ -67,6 +85,10 @@ class UserController extends Controller
         $data = [
             'student_id' => $student_id
         ];
+        if ( !$this->checkUserExist($openId))
+        {
+            $this->addUser($openId);
+        }
         $query = DB::table('users')->where('openid', $openId)->update($data);
         return $query;
     }
@@ -87,18 +109,18 @@ class UserController extends Controller
         return $query;
     }
 
-//    public function getAllUsers()
-//    {
-//        $users[0] = $this->wechat->user->lists();
-//        $count = ceil((int)$users[0]['total'] / 10000);
-//        for($i = 1; $i <= $count; $i++)
-//        {
-//            $data = $this->wechat->user->lists($users[$i-1]['next_openid']);
-//            if ($data->count)
-//            {
-//                $users[$i] = $data;
-//            }
-//        }
-//        return $users;
-//    }
+    public function getAllUsers()
+    {
+        $users[0] = $this->wechat->user->lists();
+        $count = ceil((int)$users[0]['total'] / 10000);
+        for($i = 1; $i <= $count; $i++)
+        {
+            $data = $this->wechat->user->lists($users[$i-1]['next_openid']);
+            if ($data->count)
+            {
+                $users[$i] = $data;
+            }
+        }
+        return $users;
+    }
 }
