@@ -13,7 +13,8 @@ class SchoolServiceHelper
 {
     public function getYearAndTerm()
     {
-        $month = date('m');
+        date_default_timezone_set("Asia/Shanghai");
+        $month = date("m");
         \Log::info($month);
         \Log::info(gettype($month));
     }
