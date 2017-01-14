@@ -10,7 +10,6 @@ namespace ecjtunet\schoolservice;
 
 
 use Illuminate\Support\Facades\Log;
-use Monolog\Logger;
 
 class SchoolServiceHelper
 {
@@ -18,7 +17,8 @@ class SchoolServiceHelper
     {
         date_default_timezone_set("Asia/Shanghai");
         $month = date("m");
-        Logger::INFO($month);
-        Logger::INFO(gettype($month));
+        Log::INFO('调试！');
+        Log::INFO($month);
+        Log::INFO(gettype($month));
     }
 }
