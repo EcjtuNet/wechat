@@ -7,6 +7,7 @@ use App\Jobs\sendName;
 use App\Jobs\sendPasswordFail;
 use App\Jobs\sendPasswordSuccess;
 use App\Jobs\sendScore;
+use ecjtunet\schoolservice\SchoolServiceHelper;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -46,14 +47,15 @@ class SchoolServiceController extends Controller
     public function queryScore($sender)
     {
         $info = (new UserController())->getStudentIdAndPassword($sender);
-        $year = 2016;
-        $term = 1;
+        $time = (new SchoolServiceHelper())->getYearAndTerm();
+        $year = $time['year'];
+        $term = $time['term'];
         if ($info)
         {
             $query = (new SchoolServiceAPI())->queryScore($info['student_id'], $info['password'], $year, $term);
             if ($query)
             {
-                $this->dispatch(new sendScore($sender));
+                $this->dispatch(new sendScore($sender, $query));
             }
         }
     }

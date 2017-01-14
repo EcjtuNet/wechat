@@ -19,9 +19,10 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function __construct($sender)
+    public function __construct($sender, $scores)
     {
         $this->sender = $sender;
+        $this->scores = $scores;
     }
 
     /**
@@ -31,10 +32,12 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        date_default_timezone_set("Asia/Shanghai");
-        $month = date("m");
-        $type = gettype($month);
-        $message = new Text(['content' => '你的成绩'.$month.'+'.$type]);
+        $msg = '你的成绩\n';
+        foreach ($this->scores as $score)
+        {
+            $msg = $msg.'\n'.$score['score'].'<\n>';
+        }
+        $message = new Text(['content' => $msg]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
 }
