@@ -6,9 +6,14 @@ use App\Jobs\Job;
 use EasyWeChat\Message\Text;
 use EasyWeChat;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class sendPasswordFail extends Job implements SelfHandling
+class sendPasswordFail extends Job implements SelfHandling, ShouldQueue
 {
+    use InteractsWithQueue, SerializesModels;
+    public $sender;
     /**
      * Create a new job instance.
      *

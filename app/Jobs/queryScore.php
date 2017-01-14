@@ -5,9 +5,14 @@ namespace App\Jobs;
 use App\Http\Controllers\SchoolServiceController;
 use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class queryScore extends Job implements SelfHandling
+class queryScore extends Job implements SelfHandling, ShouldQueue
 {
+    use InteractsWithQueue, SerializesModels;
+    public $sender;
     /**
      * Create a new job instance.
      *
