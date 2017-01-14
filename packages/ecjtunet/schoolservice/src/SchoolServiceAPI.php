@@ -57,4 +57,26 @@ class SchoolServiceAPI
             return false;
         }
     }
+
+    public function queryScore($student_id, $password, $year, $term)
+    {
+        $response = $this->client->post('queryScore',[
+            'form_params' => [
+                'student_id' => $student_id,
+                'password' => $password,
+                'year' => $year,
+                'term' => $term
+            ]
+        ]);
+        $json_body = $response->getBody();
+        $body = json_decode($json_body, true);
+        if ($body['status'])
+        {
+            return $body['data']['score_list'];
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

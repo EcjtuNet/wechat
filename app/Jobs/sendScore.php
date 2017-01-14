@@ -10,7 +10,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use EasyWeChat;
 
-class SendScore extends Job implements SelfHandling, ShouldQueue
+class sendScore extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     public $sender;

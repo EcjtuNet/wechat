@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\confirmName;
 use App\Jobs\confirmNameFail;
 use App\Jobs\sendName;
 use App\Jobs\sendPasswordFail;
 use App\Jobs\sendPasswordSuccess;
+use App\Jobs\sendScore;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -40,6 +40,21 @@ class SchoolServiceController extends Controller
         else
         {
             $this->dispatch(new sendPasswordFail($sender));
+        }
+    }
+
+    public function queryScore($sender)
+    {
+        $info = (new UserController())->getStudentIdAndPassword($sender);
+        $year = 2016;
+        $term = 1;
+        if ($info)
+        {
+            $query = (new SchoolServiceAPI())->queryScore($info['student_id'], $info['password'], $year, $term);
+            if ($query)
+            {
+                $this->dispatch(new sendScore($sender));
+            }
         }
     }
 }

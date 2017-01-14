@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Overtrue\Socialite\Providers\WeChatProvider;
 use EasyWeChat\Foundation\Application;
 
-class SendClass extends Job implements SelfHandling, ShouldQueue
+class sendClass extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     public $sender;

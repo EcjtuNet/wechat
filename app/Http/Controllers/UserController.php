@@ -22,6 +22,16 @@ class UserController extends Controller
         return "嗨!请回复 \"bd+学号\" 进行绑定（不用双引号和加号）";
     }
 
+    public function getStudentIdAndPassword($openId)
+    {
+        $query = DB::table('users')->where('openid', $openId)->first();
+        $info = [
+            'student_id' => $query->student_id,
+            'password' => $query->password
+        ];
+        return $info;
+    }
+
     public function addUser($openId)
     {
         $userInfo = $this->getUserDetails($openId);

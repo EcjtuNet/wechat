@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\queryScore;
 use App\Jobs\savePassword;
-use App\Jobs\SendClass;
-use App\Jobs\SendScore;
 use EasyWeChat\Message\Text;
 use EasyWeChat;
 
@@ -117,7 +116,7 @@ class WechatTextController extends Controller
     {
         if ($this->checkUserBound($sender))
         {
-            $this->dispatch(new SendScore($sender));
+            $this->dispatch(new queryScore($sender));
             return "小新正在努力查找你的成绩";
         }
         else
@@ -130,7 +129,7 @@ class WechatTextController extends Controller
     {
         if ($this->checkUserBound($sender))
         {
-            $this->dispatch(new SendClass($sender));
+
             return "小新正在努力查找你今天的课表";
         }
         else
