@@ -31,7 +31,10 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $message = new Text(['content' => '你的成绩']);
+        date_default_timezone_set("Asia/Shanghai");
+        $month = date("m");
+        $type = gettype($month);
+        $message = new Text(['content' => '你的成绩'.$month.'+'.$type]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
 }
