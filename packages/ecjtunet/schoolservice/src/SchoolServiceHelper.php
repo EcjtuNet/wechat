@@ -9,8 +9,6 @@
 namespace ecjtunet\schoolservice;
 
 
-use Illuminate\Support\Facades\Log;
-
 class SchoolServiceHelper
 {
     public function getYearAndTerm()

@@ -14,6 +14,7 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     public $sender;
+    public $scores;
     /**
      * Create a new job instance.
      *
@@ -32,11 +33,11 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $msg = '你的成绩\n';
-        foreach ($this->scores as $score)
-        {
-            $msg = $msg.'\n'.$score['score'].'<\n>';
-        }
+        $msg = '你的成绩\n123';
+//        foreach ($this->scores as $score)
+//        {
+//            $msg = $msg.'\n'.$score['score'].'<\n>';
+//        }
         $message = new Text(['content' => $msg]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
