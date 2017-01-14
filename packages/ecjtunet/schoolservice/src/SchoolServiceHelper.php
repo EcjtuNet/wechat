@@ -9,13 +9,16 @@
 namespace ecjtunet\schoolservice;
 
 
+use Illuminate\Support\Facades\Log;
+use Monolog\Logger;
+
 class SchoolServiceHelper
 {
     public function getYearAndTerm()
     {
         date_default_timezone_set("Asia/Shanghai");
         $month = date("m");
-        \Log::info($month);
-        \Log::info(gettype($month));
+        Logger::INFO($month);
+        Logger::INFO(gettype($month));
     }
 }
