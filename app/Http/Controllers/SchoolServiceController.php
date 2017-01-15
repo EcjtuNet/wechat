@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\apiQueryFail;
 use App\Jobs\confirmNameFail;
 use App\Jobs\sendName;
 use App\Jobs\sendPasswordFail;
 use App\Jobs\sendPasswordSuccess;
 use App\Jobs\sendScore;
+use App\Jobs\sendScoreFail;
 use ecjtunet\schoolservice\SchoolServiceHelper;
 use Illuminate\Http\Request;
 
@@ -51,13 +53,23 @@ class SchoolServiceController extends Controller
         $time = (new SchoolServiceHelper())->getYearAndTerm();
         $year = $time['year'];
         $term = $time['term'];
-        Log::info(serialize($info));
         if ($info)
         {
             $query = (new SchoolServiceAPI())->queryScore($info['student_id'], $info['password'], $year, $term);
-            if ($query)
+            if ($query['code'] == 200)
             {
-                $this->dispatch(new sendScore($sender, $query));
+                if ($query['data'])
+                {
+                    $this->dispatch(new sendScore($sender, $query));
+                }
+                else
+                {
+                    $this->dispatch(new sendScoreFail($sender));
+                }
+            }
+            else
+            {
+                $this->dispatch(new apiQueryFail($sender));
             }
         }
     }

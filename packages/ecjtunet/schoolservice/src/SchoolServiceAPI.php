@@ -8,6 +8,7 @@
 
 namespace ecjtunet\schoolservice;
 
+use EasyWeChat\Core\Exception;
 use GuzzleHttp\Client;
 
 class SchoolServiceAPI
@@ -60,23 +61,38 @@ class SchoolServiceAPI
 
     public function queryScore($student_id, $password, $year, $term)
     {
-        $response = $this->client->post('queryScore',[
-            'form_params' => [
-                'student_id' => $student_id,
-                'password' => $password,
-                'year' => $year,
-                'term' => $term
-            ]
-        ]);
-        $json_body = $response->getBody();
-        $body = json_decode($json_body, true);
-        if ($body['status'])
-        {
-            return $body['data']['score_list'];
+        try{
+            $response = $this->client->post('queryScore',[
+                'form_params' => [
+                    'student_id' => $student_id,
+                    'password' => $password,
+                    'year' => $year,
+                    'term' => $term
+                ]
+            ]);
+            $json_body = $response->getBody();
+            $body = json_decode($json_body, true);
+            if ($body['status'])
+            {
+                return [
+                    'code' => 200,
+                    'data' => $body['data']
+                ];
+            }
+            else
+            {
+                return [
+                    'code' => 200,
+                    'data' => null
+                ];
+            }
         }
-        else
+        catch(Exception $e)
         {
-            return false;
+            return [
+                'code' => 500,
+                'data' => null
+            ];
         }
     }
 }

@@ -3,27 +3,26 @@
 namespace App\Jobs;
 
 use App\Jobs\Job;
-use EasyWeChat\Message\Text;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use EasyWeChat\Message\Text;
 use EasyWeChat;
 
-class sendScore extends Job implements SelfHandling, ShouldQueue
+class apiQueryFail extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     public $sender;
-    public $scores;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($sender, $scores)
+    public function __construct($sender)
     {
         $this->sender = $sender;
-        $this->scores = $scores;
     }
 
     /**
@@ -33,8 +32,7 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $msg = "你的成绩 \n =========== \n";
-        $message = new Text(['content' => $msg]);
+        $message = new Text(['content' => '服务出故障了，回复抽打或摸摸头']);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
 }
