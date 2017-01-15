@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use ecjtunet\schoolservice\SchoolServiceAPI;
+use Log;
 
 class SchoolServiceController extends Controller
 {
@@ -50,6 +51,7 @@ class SchoolServiceController extends Controller
         $time = (new SchoolServiceHelper())->getYearAndTerm();
         $year = $time['year'];
         $term = $time['term'];
+        Log::info(serialize($info));
         if ($info)
         {
             $query = (new SchoolServiceAPI())->queryScore($info['student_id'], $info['password'], $year, $term);
