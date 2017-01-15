@@ -10,6 +10,9 @@ namespace ecjtunet\schoolservice;
 
 use EasyWeChat\Core\Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
 
 class SchoolServiceAPI
 {
@@ -87,10 +90,26 @@ class SchoolServiceAPI
                 ];
             }
         }
+        catch (ClientException $e)
+        {
+            // 4xx
+            return [
+                'code' => 400,
+                'data' => null
+            ];
+        }
+        catch (ServerException $e)
+        {
+            // 5xx
+            return [
+                'code' => 500,
+                'data' => null
+            ];
+        }
         catch(Exception $e)
         {
             return [
-                'code' => 500,
+                'code' => false,
                 'data' => null
             ];
         }

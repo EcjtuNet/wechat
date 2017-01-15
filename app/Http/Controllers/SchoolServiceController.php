@@ -69,6 +69,18 @@ class SchoolServiceController extends Controller
             }
             else
             {
+                if ($query['code'] == 400)
+                {
+                    Log::error("400: score api query failed");
+                }
+                elseif ($query['code'] == 500)
+                {
+                    Log::error("500: score api query failed");
+                }
+                else
+                {
+                    Log::error("socre query function something failed");
+                }
                 $this->dispatch(new apiQueryFail($sender));
             }
         }
