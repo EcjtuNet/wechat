@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\debugController;
 use App\Jobs\Job;
 use EasyWeChat\Message\Text;
 use Illuminate\Queue\SerializesModels;
@@ -34,7 +35,7 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $msg = "你的成绩 \n =========== \n";
-        if (is_array($this->scores))
+        (new debugController())->debug($this->scores);
         $message = new Text(['content' => $msg]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }

@@ -19,3 +19,4 @@ Route::any('/wechat', 'WechatController@serve');
 Route::get('/users', 'UserController@getAllUsers');
 
 Route::get('/confirmName/{student_id}', 'SchoolServiceController@confirmName');
+Route::get('debug','deBugController@debug');
