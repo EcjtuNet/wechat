@@ -37,7 +37,7 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
         $msg = "你的成绩 \n===========\n";
         foreach ($this->scores['data']['score_list'] as $score)
         {
-            $msg = $msg . "课程类型:  " . $score['classRequirement'] . " \n ";
+            $msg = $msg . " 课程类型:  " . $score['classRequirement'] . " \n ";
             $msg = $msg . "课程名称:  " . $score['objectName'] . " \n ";
             $msg = $msg . "课程成绩: " . $score['score'] . " \n ";
             $msg = $msg . "课程学分: " . $score['credit'] . " \n " . " ==========\n";
