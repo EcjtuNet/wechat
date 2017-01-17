@@ -34,7 +34,7 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $msg = "你的成绩 \n =========== \n";
+        $msg = "你的成绩 \n =========== \n".strval(is_array($this->scores));
         $message = new Text(['content' => $msg]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
