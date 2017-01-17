@@ -40,7 +40,7 @@ class sendScore extends Job implements SelfHandling, ShouldQueue
             $msg = $msg . "课程类型:  " . $score['classRequirement'] . " \n ";
             $msg = $msg . "课程名称:  " . $score['objectName'] . " \n ";
             $msg = $msg . "课程成绩: " . $score['score'] . " \n ";
-            $msg = $msg . "课程学分: " . $score['credit'] . " \n " . " ==========";
+            $msg = $msg . "课程学分: " . $score['credit'] . " \n " . " ==========\n";
         }
         $message = new Text(['content' => $msg]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
