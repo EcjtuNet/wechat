@@ -63,6 +63,11 @@ class WechatTextController extends Controller
             $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
             EasyWeChat::staff()->message($message)->to($sender)->send();
         }
+        elseif ((new UserController())->getStudentId($sender))
+        {
+            $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
+            EasyWeChat::staff()->message($message)->to($sender)->send();
+        }
         else
         {
             $student_id = preg_replace('/bd/', '', $content);
