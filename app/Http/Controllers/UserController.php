@@ -17,11 +17,6 @@ class UserController extends Controller
         $this->wechat = app('wechat');
     }
 
-    public function firstMeet()
-    {
-        return "嗨!请回复 \"bd+学号\" 进行绑定（不用双引号和加号）";
-    }
-
     public function getStudentIdAndPassword($openId)
     {
         $query = DB::table('users')->where('openid', $openId)->first();
@@ -85,7 +80,8 @@ class UserController extends Controller
 
     public function checkUserBound($openId)
     {
-        if (DB::table('users')->where('openid', $openId)->value('bound'))
+        $query = DB::table('users')->where('openid', $openId)->value('bound');
+        if ($query)
         {
             return true;
         }
@@ -102,7 +98,7 @@ class UserController extends Controller
         ];
         if ( !$this->checkUserExist($openId))
         {
-            $this->addUser($openId);
+            return $this->addUser($openId);
         }
         $query = DB::table('users')->where('openid', $openId)->update($data);
         return $query;

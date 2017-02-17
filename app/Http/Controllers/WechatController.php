@@ -24,7 +24,7 @@ class WechatController extends Controller
                     {
                         if($message->EventKey == 'Bound')
                         {
-                            return (new UserController())->firstmeet();
+                            return (new WechatTextController())->boundStudentId($message->FromUserName);
                         }
                         elseif($message->EventKey == 'Class')
                         {

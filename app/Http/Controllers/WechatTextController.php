@@ -30,7 +30,7 @@ class WechatTextController extends Controller
                 return $this->searchExam($sender);
                 break;
             case "绑定学号":
-                return $this->boundStudentId($content, $sender);
+                return $this->inputId($content, $sender);
                 break;
             case "绑定密码":
                 return $this->boundStudentPassword($content, $sender);
@@ -71,7 +71,7 @@ class WechatTextController extends Controller
         }
     }
 
-    public function boundStudentId($content, $sender)
+    public function boundStudentId($sender)
     {
         if ($this->checkUserBound($sender))
         {
@@ -85,11 +85,16 @@ class WechatTextController extends Controller
         }
         else
         {
-            Log::debug("bsiok");
-            $student_id = preg_replace('/bd/', '', $content);
+            $message = new Text(['content' => '请回复 \"bd+学号\" 进行绑定（不用双引号和加号）']);
+            EasyWeChat::staff()->message($message)->to($sender)->send();
+        }
+    }
+
+    public function inputId($content, $sender)
+    {
+        $student_id = preg_replace('/bd/', '', $content);
             (new CacheController())->save_studentid_with_openid($student_id, $sender);
             return "success";
-        }
     }
 
     public function confirmBound($sender)
@@ -142,7 +147,7 @@ class WechatTextController extends Controller
         }
         else
         {
-            return (new UserController())->firstMeet();
+            return $this->boundStudentId($sender);
         }
     }
 
@@ -155,7 +160,7 @@ class WechatTextController extends Controller
         }
         else
         {
-            return (new UserController())->firstMeet();
+            return $this->boundStudentId($sender);
         }
     }
 
@@ -168,7 +173,7 @@ class WechatTextController extends Controller
         }
         else
         {
-            return (new UserController())->firstMeet();
+            return $this->boundStudentId($sender);
         } 
     }
 
