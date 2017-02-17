@@ -11,20 +11,20 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use EasyWeChat;
 
-class sendClass extends Job implements SelfHandling, ShouldQueue
+class sendExam extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
     public $sender;
-    public $class;
+    public $exam;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($sender,$class)
+    public function __construct($sender,$exam)
     {
         $this->sender = $sender;
-        $this->class  = $class;
+        $this->exam  = $exam;
     }
 
     /**
@@ -35,18 +35,22 @@ class sendClass extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         // $message = new News([
-        //       'title'  =>  '你的课表',
+        //       'title'  =>  '你的考试安排',
         //       'image'  =>  'http://mmbiz.qpic.cn/mmbiz_jpg/J1iaWB1VlOykPibTacZHD7IvibkH7VH88vUMJlwvMOxqT0aHvFILOlkMYibxlErZD1osvTEb9QdaCtn2ibw15t2lq7g/0?wx_fmt=jpeg',
-        //       'description' => '点击查看课表',
+        //       'description' => '点击查看考试安排',
 
         //     ]);
-        $week = date("l");
-        $week = lcfirst($week);
-        $msg = "你今天的课表 \n===========\n";
-        foreach ($this->class['data']['class_list']["$week"] as $class) {
-            $msg = $msg . $class . "\n";
+        $msg = "你的考试安排 \n===========\n";
+        foreach ($this->exam['data']['exam_list'] as $exam)
+        {
+            $msg = $msg . "课程性质: " . $exam['课程性质'] . " \n ";
+            $msg = $msg . "课程名称: " . $exam['课程名称'] . " \n ";
+            $msg = $msg . "考试地点: " . $exam['考试地点'] . " \n ";
+            $msg = $msg . "班级名称: " . $exam['班级名称'] . " \n ";
+            $msg = $msg . "考试时间: " . $exam['考试时间'] . " \n ";
+            $msg = $msg . "考试周次: " . $exam['考试周次'] . " \n ";
+            $msg = $msg . "学生人数: " . $exam['学生人数'] . " \n " . " ==========\n";
         }
-
         $message = new Text(['content' => $msg]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }

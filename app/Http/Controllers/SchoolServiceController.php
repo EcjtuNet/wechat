@@ -9,6 +9,10 @@ use App\Jobs\sendPasswordFail;
 use App\Jobs\sendPasswordSuccess;
 use App\Jobs\sendScore;
 use App\Jobs\sendScoreFail;
+use App\Jobs\sendClass;
+use App\Jobs\sendClassFail;
+use App\Jobs\sendExam;
+use App\Jobs\sendExamFail; 
 use ecjtunet\schoolservice\SchoolServiceHelper;
 use Illuminate\Http\Request;
 
@@ -65,6 +69,85 @@ class SchoolServiceController extends Controller
                 else
                 {
                     $this->dispatch(new sendScoreFail($sender));
+                }
+            }
+            else
+            {
+                if ($query['code'] == 400)
+                {
+                    Log::error("400: score api query failed");
+                }
+                elseif ($query['code'] == 500)
+                {
+                    Log::error("500: score api query failed");
+                }
+                else
+                {
+                    Log::error("socre query function something failed");
+                }
+                $this->dispatch(new apiQueryFail($sender));
+            }
+        }
+    }
+
+    public function queryClass($sender)
+    {
+        $info = (new UserController())->getStudentIdAndPassword($sender);
+        $time = (new SchoolServiceHelper())->getYearAndTerm();
+        $year = $time['year'];
+        $term = $time['term'];
+        if ($info)
+        {
+            $query = (new SchoolServiceAPI())->queryClass($info['student_id'], $info['password'], $year, $term);
+            if ($query['code'] == 200)
+            {
+                //Log::debug("queryok");
+                if ($query)
+                {
+                    $this->dispatch(new sendClass($sender,$query));
+                }
+                else
+                {
+                    $this->dispatch(new sendClassFail($sender));
+                }
+            }
+            else
+            {
+                if ($query['code'] == 400)
+                {
+                    Log::error("400: score api query failed");
+                }
+                elseif ($query['code'] == 500)
+                {
+                    Log::error("500: score api query failed");
+                }
+                else
+                {
+                    Log::error("socre query function something failed");
+                }
+                $this->dispatch(new apiQueryFail($sender));
+            }
+        }
+    }
+
+    public function queryExam($sender)
+    {
+        $info = (new UserController())->getStudentIdAndPassword($sender);
+        $time = (new SchoolServiceHelper())->getYearAndTerm();
+        $year = $time['year'];
+        $term = $time['term'];
+        if ($info)
+        {
+            $query = (new SchoolServiceAPI())->queryExam($info['student_id'], $info['password'], $year, $term);
+            if ($query['code'] == 200)
+            {
+                if ($query)
+                {
+                    $this->dispatch(new sendExam($sender,$query));
+                }
+                else
+                {
+                    $this->dispatch(new sendExamFail($sender));
                 }
             }
             else

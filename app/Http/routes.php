@@ -13,9 +13,18 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
 
 Route::any('/wechat', 'WechatController@serve');
+
+//Route::get('/images', 'MaterialController@image');
+
+//Route::get('/material', 'MaterialController@material');  
+
 Route::get('/users', 'UserController@getAllUsers');
+
+Route::get('/menu', 'MenuController@menu');
+
+Route::get('/menu/all', 'MenuController@all');
 
 Route::get('/confirmName/{student_id}', 'SchoolServiceController@confirmName');
