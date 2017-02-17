@@ -115,15 +115,15 @@ class SchoolServiceController extends Controller
             {
                 if ($query['code'] == 400)
                 {
-                    Log::error("400: score api query failed");
+                    Log::error("400: class api query failed");
                 }
                 elseif ($query['code'] == 500)
                 {
-                    Log::error("500: score api query failed");
+                    Log::error("500: class api query failed");
                 }
                 else
                 {
-                    Log::error("socre query function something failed");
+                    Log::error("class query function something failed");
                 }
                 $this->dispatch(new apiQueryFail($sender));
             }
@@ -154,15 +154,15 @@ class SchoolServiceController extends Controller
             {
                 if ($query['code'] == 400)
                 {
-                    Log::error("400: score api query failed");
+                    Log::error("400: exam api query failed");
                 }
                 elseif ($query['code'] == 500)
                 {
-                    Log::error("500: score api query failed");
+                    Log::error("500: exam api query failed");
                 }
                 else
                 {
-                    Log::error("socre query function something failed");
+                    Log::error("exam query function something failed");
                 }
                 $this->dispatch(new apiQueryFail($sender));
             }
