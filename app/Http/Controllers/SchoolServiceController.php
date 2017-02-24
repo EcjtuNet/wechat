@@ -54,12 +54,13 @@ class SchoolServiceController extends Controller
     public function queryScore($sender)
     {
         $info = (new UserController())->getStudentIdAndPassword($sender);
-        $time = (new SchoolServiceHelper())->getYearAndTerm();
+        $time = (new SchoolServiceHelper())->getYearAndTermForScore();
         $year = $time['year'];
         $term = $time['term'];
         if ($info)
         {
-            $query = (new SchoolServiceAPI())->queryScore($info['student_id'], $info['password'], $year, $term);
+            $query = (new SchoolServiceAPI
+                ())->queryScore($info['student_id'], $info['password'], $year, $term);
             if ($query['code'] == 200)
             {
                 if ($query['data'])
@@ -93,7 +94,7 @@ class SchoolServiceController extends Controller
     public function queryClass($sender)
     {
         $info = (new UserController())->getStudentIdAndPassword($sender);
-        $time = (new SchoolServiceHelper())->getYearAndTerm();
+        $time = (new SchoolServiceHelper())->getYearAndTermForClass();
         $year = $time['year'];
         $term = $time['term'];
         if ($info)
@@ -133,7 +134,7 @@ class SchoolServiceController extends Controller
     public function queryExam($sender)
     {
         $info = (new UserController())->getStudentIdAndPassword($sender);
-        $time = (new SchoolServiceHelper())->getYearAndTerm();
+        $time = (new SchoolServiceHelper())->getYearAndTermForExam();
         $year = $time['year'];
         $term = $time['term'];
         if ($info)
