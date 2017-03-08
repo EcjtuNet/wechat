@@ -43,6 +43,9 @@ class WechatController extends Controller
                         elseif ($message->EventKey == 'Scene') {
                             return '/:sun 交大山水栏目即将开启，敬请期待';
                         }
+                        elseif ($message->EventKey == 'Query') {
+                            return '/:8-) 校内查询功能给即将上线';
+                        }
                     }
                     break;
                 case 'text':

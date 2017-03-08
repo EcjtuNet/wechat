@@ -61,23 +61,25 @@ class MenuController extends Controller
             ],
             [
                 "name"       => "花椒查询",
-                "sub_button" => [
-                    [
-                        "type" => "click",
-                        "name" => "成绩查询",
-                        "key" => "Score"
-                    ],
-                    [
-                        "type" => "click",
-                        "name" => "课表查询",
-                        "key" => "Class"
-                    ],
-                    [
-                        "type" => "click",
-                        "name" => "考试查询",
-                        "key" => "Exam"
-                    ]
-                ]
+//                "sub_button" => [
+//                    [
+//                        "type" => "click",
+//                        "name" => "成绩查询",
+//                        "key" => "Score"
+//                    ],
+//                    [
+//                        "type" => "click",
+//                        "name" => "课表查询",
+//                        "key" => "Class"
+//                    ],
+//                    [
+//                        "type" => "click",
+//                        "name" => "考试查询",
+//                        "key" => "Exam"
+//                    ]
+//                ]
+                "type" => 'click',
+                "key" => 'Query'
             ]
         ];
         $this->menu->add($buttons);
