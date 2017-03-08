@@ -20,31 +20,51 @@ class MenuController extends Controller
 
         $buttons = [
             [
-                "type" => "view",
-                "name" => "日新首页",
-                "url"  => "http://www.ecjtu.net/"
+                "name" => "花椒要闻",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "花椒要闻",
+                        "url" => "http://xw.ecjtu.jx.cn/1083/list.htm"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "校园通知",
+                        "url" => "http://www.ecjtu.net/html/news/rixingonggao/"
+                    ]
+                ]
             ],
             [
-                "type" => "click",
-                "name" => "绑定学号",
-                "key"  => "Bound"
+                "name" => "花椒故事",
+                "sub_button" => [
+                    [
+                        "type" => "view_limited",
+                        "name" => "美人志",
+                        "media_id" => "1"
+                    ],
+                    [
+                        "type" => "view_limited",
+                        "name" => "山水交大",
+                        "media_id" => "2"
+                    ]
+                ]
             ],
             [
-                "name"       => "服务平台",
+                "name"       => "花椒查询",
                 "sub_button" => [
                     [
                         "type" => "click",
-                        "name" => "查课表",
+                        "name" => "成绩查询",
                         "key" => "Score"
                     ],
                     [
                         "type" => "click",
-                        "name" => "查成绩",
+                        "name" => "课表查询",
                         "key" => "Class"
                     ],
                     [
                         "type" => "click",
-                        "name" => "考试安排",
+                        "name" => "考试查询",
                         "key" => "Exam"
                     ],
                 ],
