@@ -37,16 +37,26 @@ class MenuController extends Controller
             [
                 "name" => "花椒故事",
                 "sub_button" => [
-                    [
-                        "type" => "view_limited",
-                        "name" => "美人志",
-                        "media_id" => "1"
-                    ],
-                    [
-                        "type" => "view_limited",
-                        "name" => "山水交大",
-                        "media_id" => "2"
-                    ]
+//                    [
+//                        "type" => "view_limited",
+//                        "name" => "美人志",
+//                        "media_id" => "1"
+//                    ],
+//                    [
+//                        "type" => "view_limited",
+//                        "name" => "山水交大",
+//                        "media_id" => "2"
+//                    ]
+                      [
+                          "type" => "click",
+                          "name" => "美人志",
+                          "key" => "Beauty"
+                      ],
+                      [
+                          "type" => "click",
+                          "name" => "山水交大",
+                          "key" => "Scene"
+                      ]
                 ]
             ],
             [

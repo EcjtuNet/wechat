@@ -37,6 +37,12 @@ class WechatController extends Controller
                         elseif ($message->EventKey == 'Exam') {
                             return (new WechatTextController())->distinguishText('考试安排',$message->FromUserName);
                         }
+                        elseif ($message->EventKey == 'Beauty') {
+                            return '/:rose 美人志栏目即将开启，敬请期待';
+                        }
+                        elseif ($message->EventKey == 'Scene') {
+                            return '/:sun 交大山水栏目即将开启，敬请期待';
+                        }
                     }
                     break;
                 case 'text':
