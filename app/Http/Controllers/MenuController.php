@@ -66,9 +66,9 @@ class MenuController extends Controller
                         "type" => "click",
                         "name" => "考试查询",
                         "key" => "Exam"
-                    ],
-                ],
-            ],
+                    ]
+                ]
+            ]
         ];
         $this->menu->add($buttons);
     }
