@@ -17,7 +17,7 @@ class WechatController extends Controller
                 case 'event':
                     if($message->Event == 'subscribe')
                     {
-                        return '/:rose，谢谢你对交大的支持！我们是你的好伙伴，将为你带来新鲜好玩的校园新闻，有用的资讯信息和贴心的生活服务/:sun！对我们有任何意见或建议都可以直接发送给我们，我们会及时给您回复！欢迎提供校园新闻线索，有什么新奇想法有趣图文也可以投稿给我们/:lvu！';
+                        return '/:rose谢谢你对交大的支持！我们是你的好伙伴，将为你带来新鲜好玩的校园新闻，有用的资讯信息和贴心的生活服务/:sun！对我们有任何意见或建议都可以直接发送给我们，我们会及时给您回复！欢迎提供校园新闻线索，有什么新奇想法有趣图文也可以投稿给我们/:lvu！';
                     }
 
                     if($message->Event == 'CLICK')
@@ -30,7 +30,7 @@ class WechatController extends Controller
                         {
                             return (new WechatTextController())->distinguishText('成绩',$message->FromUserName);
                         }
-                        elseif ($message->EventKey == 'Score') 
+                        elseif ($message->EventKey == 'Score')
                         {
                             return (new WechatTextController())->distinguishText('课表',$message->FromUserName);
                         }
@@ -41,12 +41,13 @@ class WechatController extends Controller
                             return '/:rose 美人志栏目即将开启，敬请期待';
                         }
                         elseif ($message->EventKey == 'Scene') {
-                            return '/:sun 交大山水栏目即将开启，敬请期待';
+                            return '/:sun 山水交大栏目即将开启，敬请期待';
                         }
                         elseif ($message->EventKey == 'Query') {
-                            return '/:8-) 校内查询功能给即将上线';
+                            return '/:8-) 校内查询功能即将上线';
                         }
                     }
+
                     break;
                 case 'text':
                     return (new WechatTextController())->distinguishText($message->Content, $message->FromUserName);
