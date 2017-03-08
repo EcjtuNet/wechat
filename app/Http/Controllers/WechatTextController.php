@@ -8,7 +8,6 @@ use App\Jobs\queryExam;
 use App\Jobs\savePassword;
 use EasyWeChat\Message\Text;
 use EasyWeChat;
-use Log;
 
 class WechatTextController extends Controller
 {
@@ -39,7 +38,7 @@ class WechatTextController extends Controller
                 return $this->confirmBound($sender);
                 break;
             default:
-                return '亲，你可以输入“成绩”查询自己的成绩，输入“课表”查询你的课表,或点击菜单栏中的服务平台查询.';
+                return 'success';
                 break;
         }
     }
