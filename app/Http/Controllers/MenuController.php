@@ -45,7 +45,7 @@ class MenuController extends Controller
                     [
                         "type" => "view",
                         "name" => "山水交大",
-                        "media_id" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=2&sn=b10cf8619f16dd72b4dcb4585b67f011#wechat_redirect"
+                        "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=2&sn=b10cf8619f16dd72b4dcb4585b67f011#wechat_redirect"
                     ]
                 ]
             ],

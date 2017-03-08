@@ -28,3 +28,5 @@ Route::get('/menu', 'MenuController@menu');
 Route::get('/menu/all', 'MenuController@all');
 
 Route::get('/confirmName/{student_id}', 'SchoolServiceController@confirmName');
+
+Route::get('/news', 'MessageController@getNews');
