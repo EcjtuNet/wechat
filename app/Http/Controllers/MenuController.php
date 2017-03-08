@@ -37,26 +37,16 @@ class MenuController extends Controller
             [
                 "name" => "花椒故事",
                 "sub_button" => [
-//                    [
-//                        "type" => "view_limited",
-//                        "name" => "美人志",
-//                        "media_id" => "1"
-//                    ],
-//                    [
-//                        "type" => "view_limited",
-//                        "name" => "山水交大",
-//                        "media_id" => "2"
-//                    ]
-                      [
-                          "type" => "click",
-                          "name" => "美人志",
-                          "key" => "Beauty"
-                      ],
-                      [
-                          "type" => "click",
-                          "name" => "山水交大",
-                          "key" => "Scene"
-                      ]
+                    [
+                        "type" => "view",
+                        "name" => "美人志",
+                        "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=1&sn=4aad9ec4644bf2b674faa222a209a79b#wechat_redirect"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "山水交大",
+                        "media_id" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=2&sn=b10cf8619f16dd72b4dcb4585b67f011#wechat_redirect"
+                    ]
                 ]
             ],
             [
