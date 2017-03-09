@@ -25,6 +25,9 @@ class WechatController extends Controller
                         if ($message->EventKey == 'Query') {
                             return '/:8-) 校内查询功能即将上线';
                         }
+                        elseif ($message-EventKey == 'LostAndFound') {
+                            return '失物招领功能即将上线，届时将为大家提供平台，把丢失的饭卡速速的找回来/:8-)';
+                        }
                     }
 
                     break;

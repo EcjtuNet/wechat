@@ -57,20 +57,10 @@ class MenuController extends Controller
                         "name" => "查询服务",
                         "key" => "Query"
                       ],
-//                    [
-//                        "type" => "click",
-//                        "name" => "课表查询",
-//                        "key" => "Class"
-//                    ],
-//                    [
-//                        "type" => "click",
-//                        "name" => "考试查询",
-//                        "key" => "Exam"
-//                    ],
                       [
-                          "type" => "view",
-                          "name" => "早起打卡",
-                          "url" => "http://www.pocketuniversity.cn/index.php/Signin/index/index?media_id=gh_19638fd46215"
+                       "type" => "click",
+                       "name" => "失物招领",
+                       "key" => "LostAndFound"
                       ]
                 ]
             ]
