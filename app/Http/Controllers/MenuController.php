@@ -51,12 +51,12 @@ class MenuController extends Controller
             ],
             [
                 "name"       => "花椒查询",
-//                "sub_button" => [
-//                    [
-//                        "type" => "click",
-//                        "name" => "成绩查询",
-//                        "key" => "Score"
-//                    ],
+                "sub_button" => [
+                      [
+                        "type" => "click",
+                        "name" => "查询服务",
+                        "key" => "Query"
+                      ],
 //                    [
 //                        "type" => "click",
 //                        "name" => "课表查询",
@@ -66,10 +66,13 @@ class MenuController extends Controller
 //                        "type" => "click",
 //                        "name" => "考试查询",
 //                        "key" => "Exam"
-//                    ]
-//                ]
-                "type" => 'click',
-                "key" => 'Query'
+//                    ],
+                      [
+                          "type" => "view",
+                          "name" => "早起打卡",
+                          "url" => "http://www.pocketuniversity.cn/index.php/Signin/index/index?media_id=gh_19638fd46215"
+                      ]
+                ]
             ]
         ];
         $this->menu->add($buttons);

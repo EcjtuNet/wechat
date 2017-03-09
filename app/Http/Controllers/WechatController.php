@@ -22,22 +22,7 @@ class WechatController extends Controller
 
                     if($message->Event == 'CLICK')
                     {
-                        if($message->EventKey == 'Bound')
-                        {
-                            return (new WechatTextController())->boundStudentId($message->FromUserName);
-                        }
-                        elseif($message->EventKey == 'Class')
-                        {
-                            return (new WechatTextController())->distinguishText('成绩',$message->FromUserName);
-                        }
-                        elseif ($message->EventKey == 'Score')
-                        {
-                            return (new WechatTextController())->distinguishText('课表',$message->FromUserName);
-                        }
-                        elseif ($message->EventKey == 'Exam') {
-                            return (new WechatTextController())->distinguishText('考试安排',$message->FromUserName);
-                        }
-                        elseif ($message->EventKey == 'Query') {
+                        if ($message->EventKey == 'Query') {
                             return '/:8-) 校内查询功能即将上线';
                         }
                     }
