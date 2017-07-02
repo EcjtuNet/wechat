@@ -37,6 +37,21 @@ class MenuController extends Controller
             [
                 "name" => "花椒故事",
                 "sub_button" => [
+                    [   
+                        "type" => "view",
+                        "name" => "我要投稿",
+                        "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=1&sn=4aad9ec4644bf2b674faa222a209a79b#wechat_redirect"
+                    ],
+                    [   
+                        "type" => "view",
+                        "name" => "学在交大",
+                        "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=1&sn=4aad9ec4644bf2b674faa222a209a79b#wechat_redirect"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "教在交大",
+                        "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=1&sn=4aad9ec4644bf2b674faa222a209a79b#wechat_redirect"
+                    ],
                     [
                         "type" => "view",
                         "name" => "美人志",
@@ -44,7 +59,7 @@ class MenuController extends Controller
                     ],
                     [
                         "type" => "view",
-                        "name" => "山水交大",
+                        "name" => "山水校园",
                         "url" => "http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NDA2NjI0MA==&hid=2&sn=b10cf8619f16dd72b4dcb4585b67f011#wechat_redirect"
                     ]
                 ]
@@ -54,16 +69,26 @@ class MenuController extends Controller
                 "sub_button" => [
                       [
                         "type" => "click",
-                        "name" => "查询服务",
-                        "key" => "Query"
+                        "name" => "学号绑定",
+                        "key" => "Band"
+                      ],
+                      [
+                       "type" => "click",
+                       "name" => "查询服务",
+                       "key" => "Query"
                       ],
                       [
                        "type" => "click",
                        "name" => "失物招领",
                        "key" => "LostAndFound"
-                      ]
-                ]
-            ]
+                      ],
+                      [
+                       "type" => "view",
+                       "name" => "加入我们",
+                       "url" => "http://hr.ecjtu.net"
+                      ],
+                ],
+            ],
         ];
         $this->menu->add($buttons);
     }

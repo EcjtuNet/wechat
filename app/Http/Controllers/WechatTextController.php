@@ -6,6 +6,8 @@ use App\Jobs\queryScore;
 use App\Jobs\queryClass;
 use App\Jobs\queryExam;
 use App\Jobs\savePassword;
+//use App\Http\Controllers\CacheController;
+use App\Http\Controllers\UserController;
 use EasyWeChat\Message\Text;
 use EasyWeChat;
 
@@ -72,6 +74,7 @@ class WechatTextController extends Controller
 
     public function boundStudentId($sender)
     {
+        //return $sender;
         if ($this->checkUserBound($sender))
         {
             $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
@@ -92,8 +95,8 @@ class WechatTextController extends Controller
     public function inputId($content, $sender)
     {
         $student_id = preg_replace('/bd/', '', $content);
-            (new CacheController())->save_studentid_with_openid($student_id, $sender);
-            return "success";
+            return (new CacheController())->save_studentid_with_openid($student_id, $sender);
+            //return "success";
     }
 
     public function confirmBound($sender)
@@ -116,7 +119,6 @@ class WechatTextController extends Controller
         {
             $password = preg_replace('/mm/', '', $content);
             $this->dispatch(new savePassword($student_id, $password,$sender));
-            return 'success';
         }
         else
         {
