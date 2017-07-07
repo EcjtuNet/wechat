@@ -18,6 +18,7 @@ class WechatTextController extends Controller
 {
     public function __construct()
     {
+        session_start();
         $this->wechat = app('wechat');
     }
 
@@ -75,7 +76,7 @@ class WechatTextController extends Controller
     //     }
     // }
 
-    public function boundStudentId(Request $request)
+    public function boundStudentId()
     {
         if (Request::ajax()) {
             $data = Input::all();
@@ -96,18 +97,19 @@ class WechatTextController extends Controller
         {
             $info = array(
                 'status' => 1,
-                'msg' => '已经绑定，请通知管理员解除绑定' 
+                'msg' => '你的微信号已经绑定了学号，你可以通知管理员解除绑定' 
                 );
             return $info;
         }
         else
         {
+            $confirmName = $this->inputId($number, $sender);
             if ($confirmName) {
                 $confirmPass = $this->boundStudentPassword($number, $pass, $sender);
                 if ($confirmPass) {
                    $info = array(
                     'status' => 4,
-                    'msg' => '绑定成功' 
+                    'msg' => "$confirmName"."绑定成功" 
                     );
 
                     return $info;
@@ -136,7 +138,7 @@ class WechatTextController extends Controller
 
     private function inputId($number, $sender)
     {
-        (new CacheController())->save_studentid_with_openid($number, $sender);
+        return (new CacheController())->save_studentid_with_openid($number, $sender);
     }
 
     public function confirmBound($sender)
