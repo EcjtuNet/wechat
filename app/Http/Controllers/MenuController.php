@@ -68,9 +68,9 @@ class MenuController extends Controller
                 "name"       => "花椒查询",
                 "sub_button" => [
                       [
-                        "type" => "click",
+                        "type" => "view",
                         "name" => "学号绑定",
-                        "key" => "Band"
+                        "url" => "https://wechat.ecjtu.net/view"
                       ],
                       [
                        "type" => "click",

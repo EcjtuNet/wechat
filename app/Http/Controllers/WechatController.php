@@ -22,10 +22,12 @@ class WechatController extends Controller
 
                     if($message->Event == 'CLICK')
                     {
-                        if ($message->EventKey == 'Band') {
-                            return (new WechatTextController())->boundStudentId($message->FromUserName);
-                        }
-                        elseif ($message->EventKey == 'Query') {
+                        // if ($message->EventKey == 'Band') {
+                        //     //return (new WechatTextController())->loadView($message->FromUserName);
+                        //     return (new WechatTextController())->boundStudentId($message->FromUserName);
+                        //     //return view('welcome');
+                        // }
+                        if ($message->EventKey == 'Query') {
                             return '/:8-) 校内查询功能即将上线';
                         }
                         elseif ($message->EventKey == 'LostAndFound') {

@@ -28,12 +28,14 @@ class SchoolServiceController extends Controller
         $query = (new SchoolServiceAPI())->confirmName($student_id);
         if ($query)
         {
-            $this->dispatch(new sendName($query, $sender));
+            return $query; 
+            //$this->dispatch(new sendName($query, $sender));
         }
         else
         {
             (new CacheController())->del_studentid_with_openid($sender);
-            $this->dispatch(new confirmNameFail($sender));
+            return 0;
+            //$this->dispatch(new confirmNameFail($sender));
         }
     }
 
@@ -42,12 +44,13 @@ class SchoolServiceController extends Controller
         $query = (new SchoolServiceAPI())->savePassword($student_id, $password);
         if ($query)
         {
+            (new UserController())->addUser($sender);
             (new UserController())->boundStudentPassword($sender, $password);
-            $this->dispatch(new sendPasswordSuccess($sender));
+            return true;
         }
         else
         {
-            $this->dispatch(new sendPasswordFail($sender));
+            return false;
         }
     }
 
