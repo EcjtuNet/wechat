@@ -1,15 +1,15 @@
 <?php
-
 namespace App\Jobs;
 
 use App\Http\Controllers\debugController;
 use App\Jobs\Job;
-use EasyWeChat\Message\Text;
+use EasyWeChat\Message\News;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use EasyWeChat;
+use Log;
 
 class sendExam extends Job implements SelfHandling, ShouldQueue
 {
@@ -34,12 +34,6 @@ class sendExam extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        // $message = new News([
-        //       'title'  =>  '你的考试安排',
-        //       'image'  =>  'http://mmbiz.qpic.cn/mmbiz_jpg/J1iaWB1VlOykPibTacZHD7IvibkH7VH88vUMJlwvMOxqT0aHvFILOlkMYibxlErZD1osvTEb9QdaCtn2ibw15t2lq7g/0?wx_fmt=jpeg',
-        //       'description' => '点击查看考试安排',
-
-        //     ]);
         $msg = "你的考试安排 \n===========\n";
         foreach ($this->exam['data']['exam_list'] as $exam)
         {
@@ -51,7 +45,13 @@ class sendExam extends Job implements SelfHandling, ShouldQueue
             $msg = $msg . "考试周次: " . $exam['考试周次'] . " \n ";
             $msg = $msg . "学生人数: " . $exam['学生人数'] . " \n " . " ==========\n";
         }
-        $message = new Text(['content' => $msg]);
+
+        $message = new News([
+              'title'  =>  '你的考试安排',
+              'description' => "$msg",
+
+            ]);
+
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
 }

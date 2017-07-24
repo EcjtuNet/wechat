@@ -8,6 +8,7 @@ use App\Http\Controllers\SchoolServiceController;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Log;
 
 class confirmName extends Job implements SelfHandling, ShouldQueue
 {
