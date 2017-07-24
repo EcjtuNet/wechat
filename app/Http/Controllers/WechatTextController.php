@@ -2,143 +2,106 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
 use App\Jobs\queryScore;
+use App\Jobs\testClass;
 use App\Jobs\queryClass;
 use App\Jobs\queryExam;
 use App\Jobs\savePassword;
-//use App\Http\Controllers\CacheController;
+use App\Http\Controllers\CacheController;
 use App\Http\Controllers\UserController;
 use EasyWeChat\Message\Text;
 use EasyWeChat;
-use Input;
-use Request;
+use Log;
+
 
 class WechatTextController extends Controller
 {
     public function __construct()
     {
-        session_start();
         $this->wechat = app('wechat');
     }
 
-    // public function distinguishText($content, $sender)
-    // {
-    //     switch ($this->matchContent($content)) {
-    //         case "查成绩":
-    //             return $this->searchScore($sender);
-    //             break;
-    //         case "查课表":
-    //             return $this->searchClass($sender);
-    //             break;
-    //         case "考试安排":
-    //             return $this->searchExam($sender);
-    //             break;
-    //         case "绑定学号":
-    //             return $this->inputId($content, $sender);
-    //             break;
-    //         case "绑定密码":
-    //             return $this->boundStudentPassword($content, $sender);
-    //             break;
-    //         case "确定绑定":
-    //             return $this->confirmBound($sender);
-    //             break;
-    //         default:
-    //             return 'success';
-    //             break;
-    //     }
-    // }
-
-    // private function matchContent($content)
-    // {
-    //     if (preg_match_all("/成绩/", $content))
-    //     {
-    //         return "查成绩";
-    //     }
-    //     elseif (preg_match_all("/课(程)?表/", $content))
-    //     {
-    //         return "查课表";
-    //     }
-    //     elseif (preg_match_all("/考试安排/", $content)) {
-    //         return "考试安排";
-    //     }
-    //     elseif (preg_match_all("/bd[0-9]{14,16}/",$content))
-    //     {
-    //         return "绑定学号";
-    //     }
-    //     elseif (preg_match_all("/mm.*/",$content))
-    //     {
-    //         return "绑定密码";
-    //     }
-    //     else
-    //     {
-    //         return $content;
-    //     }
-    // }
-
-    public function boundStudentId()
+    public function distinguishText($content, $sender)
     {
-        if (Request::ajax()) {
-            $data = Input::all();
-
-            $sender = $data['user_openid'];
-            $number = $data['user_number'];
-            $pass = $data['user_password'];
-        }
-
-        if ($number == '' && $pass == '') {
-             $info = array(
-                'status' => 0,
-                'msg' => '请将信息填写完整' 
-                );
-            return $info;
-        }
-        elseif ($this->checkUserBound($sender))
-        {
-            $info = array(
-                'status' => 1,
-                'msg' => '你的微信号已经绑定了学号，你可以通知管理员解除绑定' 
-                );
-            return $info;
-        }
-        else
-        {
-            $confirmName = $this->inputId($number, $sender);
-            if ($confirmName) {
-                $confirmPass = $this->boundStudentPassword($number, $pass, $sender);
-                if ($confirmPass) {
-                   $info = array(
-                    'status' => 4,
-                    'msg' => "$confirmName"."绑定成功" 
-                    );
-
-                    return $info;
-                }
-                else
-                {
-                    $info = array(
-                    'status' => 3,
-                    'msg' => '密码错误' 
-                    );
-
-                    return $info;
-                }
-            }
-            else
-            {
-                $info = array(
-                    'status' => 2,
-                    'msg' => '学号错误' 
-                    );
-
-                return $info;
-            }
+        switch ($this->matchContent($content)) {
+            case "查成绩":
+                return $this->searchScore($sender);
+                break;
+            case "查课表":
+                return $this->searchClass($sender);
+                break;
+            case "考试安排":
+                return $this->searchExam($sender);
+                break;
+            case "绑定学号":
+                return $this->inputId($content, $sender);
+                break;
+            case "绑定密码":
+                return $this->boundStudentPassword($content, $sender);
+                break;
+            case "确定绑定":
+                return $this->confirmBound($sender);
+                break;
+            default:
+                return '亲,我不明白你说了神马...';
+                break;
         }
     }
 
-    private function inputId($number, $sender)
+    private function matchContent($content)
     {
-        return (new CacheController())->save_studentid_with_openid($number, $sender);
+        if (preg_match_all("/成绩/", $content))
+        {
+            return "查成绩";
+        }
+        elseif (preg_match_all("/课(程)?表/", $content))
+        {
+            return "查课表";
+        }
+        elseif (preg_match_all("/考试安排/", $content)) {
+            return "考试安排";
+        }
+        elseif (preg_match_all("/bd[0-9]{14,16}/",$content))
+        {
+            return "绑定学号";
+        }
+        elseif (preg_match_all("/mm.*/",$content))
+        {
+            return "绑定密码";
+        }
+        elseif (preg_match_all("/确(定|认)绑定/",$content))
+        {
+            return "确定绑定";
+        }
+        else
+        {
+            return $content;
+        }
+    }
+
+    public function boundStudentId($sender)
+    {
+        if ($this->checkUserBound($sender))
+          {
+              $message = new Text(['content' => '已经绑定，请联系运营人员解绑']);
+             EasyWeChat::staff()->message($message)->to($sender)->send();
+         }
+         elseif ((new UserController())->getStudentId($sender))
+         {
+             $message = new Text(['content' => '请回复\"mm+智慧交大登录密码\"绑定密码(例如:mm111111)']);
+             EasyWeChat::staff()->message($message)->to($sender)->send();
+         }
+         else
+         {
+             $message = new Text(['content' => '请回复 "bd+学号" 进行绑定（例如：bd1111111111111111）']);
+             EasyWeChat::staff()->message($message)->to($sender)->send();
+         }
+    }
+
+    private function inputId($content, $sender)
+    {
+        $student_id = preg_replace('/bd/', '', $content);
+        (new CacheController())->save_studentid_with_openid($student_id, $sender);
     }
 
     public function confirmBound($sender)
@@ -149,14 +112,22 @@ class WechatTextController extends Controller
         {
             (new UserController())->boundStudentId($sender, $student_id);
             (new CacheController())->del_studentid_with_openid($sender);
-            return "请回复\"mm+智慧交大登录密码\"绑定密码(不用双引号和加号)";
+            return "请回复\"mm+智慧交大登录密码\"绑定密码(例如:mm111111)";
         }
         return "诶呀，好像出了点问题，稍后再试试吧";
     }
 
-    public function boundStudentPassword($number, $pass, $sender)
+    public function boundStudentPassword($content, $sender)
     {
-        return (new SchoolServiceController())->savePassword($number, $pass, $sender);
+        $student_id = (new UserController())->getStudentId($sender);
+        if ($student_id)
+        {
+            $password = preg_replace('/mm/', '', $content);
+            $this->dispatch(new savePassword($student_id, $password,$sender));
+            return 'success';
+        }else{
+             return "请先绑定学号";
+        }
     }
 
     private function checkUserBound($sender)
@@ -181,7 +152,11 @@ class WechatTextController extends Controller
         }
         else
         {
+            $msg = new Text(['content' => '请先完成学号绑定部分!']);
+
             return $this->boundStudentId($sender);
+
+            EasyWeChat::staff()->message($message)->to($sender)->send();
         }
     }
 
@@ -194,7 +169,11 @@ class WechatTextController extends Controller
         }
         else
         {
+            $msg = new Text(['content' => '请先完成学号绑定部分!']);
+
             return $this->boundStudentId($sender);
+
+            EasyWeChat::staff()->message($message)->to($sender)->send();
         }
     }
 
@@ -207,7 +186,11 @@ class WechatTextController extends Controller
         }
         else
         {
+            $msg = new Text(['content' => '请先完成学号绑定部分!']);
+
             return $this->boundStudentId($sender);
+
+            EasyWeChat::staff()->message($message)->to($sender)->send();
         } 
     }
 

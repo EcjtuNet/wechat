@@ -68,25 +68,30 @@ class MenuController extends Controller
                 "name"       => "花椒查询",
                 "sub_button" => [
                       [
-                        "type" => "view",
+                        "type" => "click",
                         "name" => "学号绑定",
-                        "url" => "https://wechat.ecjtu.net/view"
+                        "key" => "Band"
                       ],
                       [
                        "type" => "click",
-                       "name" => "查询服务",
-                       "key" => "Query"
+                       "name" => "成绩",
+                       "key" => "QueryScore"
                       ],
                       [
                        "type" => "click",
-                       "name" => "失物招领",
-                       "key" => "LostAndFound"
+                       "name" => "课表",
+                       "key" => "QueryClass"
                       ],
                       [
-                       "type" => "view",
-                       "name" => "加入我们",
-                       "url" => "http://hr.ecjtu.net"
+                       "type" => "click",
+                       "name" => "考试安排",
+                       "key" => "QueryExam"
                       ],
+                      // [
+                      //  "type" => "view",
+                      //  "name" => "加入我们",
+                      //  "url" => ""
+                      // ],
                 ],
             ],
         ];

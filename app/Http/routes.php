@@ -27,24 +27,13 @@ Route::get('/menu', 'MenuController@menu');
 
 Route::get('/menu/all', 'MenuController@all');
 
-Route::get('/confirmName/{student_id}', 'SchoolServiceController@confirmName');
-
 Route::get('/news', 'MessageController@getNews');
 
-Route::get('/view', 'WechatTextController@loadView');
+// Route::group(['middleware' => ['wechat.oauth:snsapi_base']], function () {
+// 	Route::get('/view', function(){
+// 		$user = session('wechat.oauth_user');
 
-Route::group(['middleware' => ['wechat.oauth:snsapi_base']], function () {
-	Route::get('/view', function(){
-		$user = session('wechat.oauth_user');
-
-		return view('band', compact('user'));
-	});
-});
-
-//Route::group(['prefix' => 'ajax', 'namespace' => 'Ajax'], function(){
-	Route::post('/bound','WechatTextController@boundStudentId');
-//});
-
-// Route::get('/test',function(){
-// 	return view('band');
+// 		return view('band', compact('user'));
+// 	});
 // });
+

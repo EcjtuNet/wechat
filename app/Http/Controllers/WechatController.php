@@ -26,10 +26,16 @@ class WechatController extends Controller
 
                     if($message->Event == 'CLICK')
                     {
-                        if ($message->EventKey == 'Query') {
-                            $content = new Text(['content' => "/:8-) 校内查询功能即将上线"]);
-                            EasyWeChat::staff()->message($content)->to($message->FromUserName)->send();
-                            //return '/:8-) 校内查询功能即将上线';
+                        if ($message->EventKey == 'Band') {
+                            return (new WechatTextController())->boundStudentId($message->FromUserName);
+                        }elseif ($message->EventKey == 'QueryScore') {
+                            return (new WechatTextController())->searchScore($message->FromUserName);
+                        }
+                        elseif ($message->EventKey == 'QueryClass') {
+                            return (new WechatTextController())->searchClass($message->FromUserName);
+                        }
+                        elseif ($message->EventKey == 'QueryExam') {
+                            return (new WechatTextController())->searchExam($message->FromUserName);
                         }
                         elseif ($message->EventKey == 'LostAndFound') {
                             $content = new Text(['content' => "失物招领功能即将上线，届时将为大家提供平台，把丢失的饭卡速速的找回来/:8-)"]);

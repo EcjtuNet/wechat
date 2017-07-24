@@ -12,10 +12,10 @@ class CacheController extends Controller
 {
     public function save_studentid_with_openid($student_id, $openid)
     {
+
         $cache = Redis::set("$openid:xh", $student_id);
         Redis::expire($cache, intval(env('STUDENT_ID_TIMEOUT')));
-        //$this->dispatch(new confirmName($student_id, $openid));
-        return (new SchoolServiceController())->confirmName($student_id, $openid);
+        $this->dispatch(new confirmName($student_id, $openid));
     }
 
     public function del_studentid_with_openid($openid)
