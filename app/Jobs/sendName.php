@@ -33,7 +33,7 @@ class sendName extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $message = new Text(['content' => "$this->name 同学，确定绑定请回复 \"'确定绑定'或'确认绑定'\"; 若非本人，可回复\"bd+学号\"重新绑定"]);
+        $message = new Text(['content' => "$this->name 同学是你吗？如果是你的话，请输入\"mm+智慧交大密码\"进行绑定(例如:mm111111)，如果不是你，你可以重新输入\"bd+学号\"进行绑定"]);
         EasyWeChat::staff()->message($message)->to($this->sender)->send();
     }
 }

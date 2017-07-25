@@ -53,6 +53,27 @@ class UserController extends Controller
         return DB::table('users')->where('openid', $openId)->first();
     }
 
+    public function deleteUser($openId)
+    {
+        $query = DB::table('users')->where('openId', $openId)->delete();
+        if ($query) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getPass($openId)
+    {
+        $query = DB::table('users')->where('openId',$openId)->first();
+        $query = $query->password;
+        if ($query == null) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     private function getUserDetails($openId)
     {
         $user = $this->wechat->user->get($openId);
